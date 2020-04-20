@@ -38,3 +38,5 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
 }
+
+apply from: 'publish.gradle'
