@@ -19,7 +19,7 @@ properties.load(new FileInputStream("local.properties"))
 bintray {
     user = properties.getProperty("bintray.user")
     key = properties.getProperty("bintray.apikey")
-    publications = ['Production']
+    publications = ['mavenPublish']
     configurations = ['archives']
     override = true
     pkg {
