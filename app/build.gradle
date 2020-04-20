@@ -38,4 +38,7 @@ dependencies {
     // -- Retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+
+    // LiveData Call Adapter Dependency
+    implementation project(":livedatalibrary")
 }
