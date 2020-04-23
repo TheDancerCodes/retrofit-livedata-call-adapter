@@ -4,31 +4,31 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
-import com.thedancercodes.sample_app.db.WordRoomDatabase
-import com.thedancercodes.sample_app.model.Word
-import com.thedancercodes.sample_app.repo.WordRepository
+import com.thedancercodes.sample_app.db.PostRoomDatabase
+import com.thedancercodes.sample_app.model.Post
+import com.thedancercodes.sample_app.repo.PostRepository
 import kotlinx.coroutines.launch
 
 // Class extends AndroidViewModel and requires application as a parameter.
-class WordViewModel(application: Application) : AndroidViewModel(application) {
+class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     // private member variable to hold a reference to the repository.
     // The ViewModel maintains a reference to the repository to get data.
-    private val repository: WordRepository
+    private val repository: PostRepository
 
-    // public LiveData member variable to cache the list of words.
-    // LiveData gives us updated words when they change.
-    val allWords: LiveData<List<Word>>
+    // public LiveData member variable to cache the list of posts.
+    // LiveData gives us updated posts when they change.
+    val allPosts: LiveData<List<Post>>
 
     init {
 
-        // Gets reference to WordDao from WordRoomDatabase to construct
-        // the correct WordRepository.
-        val wordsDao = WordRoomDatabase.getDatabase(application, viewModelScope).wordDao()
-        repository = WordRepository(wordsDao)
+        // Gets reference to PostDao from PostRoomDatabase to construct
+        // the correct PostRepository.
+        val wordsDao = PostRoomDatabase.getDatabase(application, viewModelScope).postDao()
+        repository = PostRepository(wordsDao)
 
-        // Initialized the allWords LiveData using the repository.
-        allWords = repository.allWords
+        // Initialized the allPosts LiveData using the repository.
+        allPosts = repository.allPosts
     }
 
     /**
@@ -40,7 +40,7 @@ class WordViewModel(application: Application) : AndroidViewModel(application) {
      * ViewModels have a coroutine scope based on their lifecycle called
      * viewModelScope which we can use here.
      */
-    fun insert(word: Word) = viewModelScope.launch {
-        repository.insert(word)
+    fun insert(post: Post) = viewModelScope.launch {
+        repository.insert(post)
     }
 }

@@ -5,7 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
-import com.thedancercodes.sample_app.model.Word
+import com.thedancercodes.sample_app.model.Post
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
@@ -21,11 +21,13 @@ import kotlinx.coroutines.launch
  * a RoomDatabase object in the application context from the WordRoomDatabase class and
  * names it "word_database".
  */
-@Database(entities = [Word::class], version = 1, exportSchema = false)
-public abstract class WordRoomDatabase : RoomDatabase() {
+@Database(entities = [Post::class], version = 1, exportSchema = false)
+public abstract class PostRoomDatabase : RoomDatabase() {
 
     // Make database provide its DAOs by creating an abstract "getter" method for each @Dao.
-    abstract fun wordDao(): WordDao
+//    abstract fun wordDao(): WordDao
+
+    abstract fun postDao(): PostDao
 
     /**
      * A custom implementation of the RoomDatabase.Callback(), that also gets a CoroutineScope as
@@ -33,7 +35,7 @@ public abstract class WordRoomDatabase : RoomDatabase() {
      *
      * Then, we override the onOpen method to populate the database.
      */
-    private class WordDatabaseCallback(private val scope: CoroutineScope)
+    private class PostDatabaseCallback(private val scope: CoroutineScope)
         : RoomDatabase.Callback() {
 
         /**
@@ -45,24 +47,27 @@ public abstract class WordRoomDatabase : RoomDatabase() {
             super.onOpen(db)
             INSTANCE?.let { database ->
                 scope.launch {
-                    populateDatabase(database.wordDao())
+                    populateDatabase(database.postDao())
                 }
             }
         }
 
-        suspend fun populateDatabase(wordDao: WordDao) {
+        suspend fun populateDatabase(postDao: PostDao) {
             // Delete all content here.
-            wordDao.deleteAll()
+            postDao.deleteAll()
 
-            // Add sample words.
-            var word = Word("Niaje")
-            wordDao.insert(word)
+            // Add sample Posts.
+            var post = Post(1, 1, "First Post", "First post")
+            postDao.insert(post)
 
-            word = Word("Vipi?")
-            wordDao.insert(word)
+            post = Post(1, 2, "Second Post", "Second post")
+            postDao.insert(post)
 
-            word = Word("Cheki!")
-            wordDao.insert(word)
+            post = Post(1, 3, "Third Post", "Third post")
+            postDao.insert(post)
+
+            post = Post(1, 4, "The Avengers", "Avengers!! Assemble!")
+            postDao.insert(post)
         }
     }
 
@@ -70,11 +75,11 @@ public abstract class WordRoomDatabase : RoomDatabase() {
         // Singleton prevents multiple instances of database opening at the
         // same time.
         @Volatile
-        private var INSTANCE: WordRoomDatabase? = null
+        private var INSTANCE: PostRoomDatabase? = null
 
         fun getDatabase(
             context: Context,
-            scope: CoroutineScope): WordRoomDatabase {
+            scope: CoroutineScope): PostRoomDatabase {
             val tempInstance = INSTANCE
             if (tempInstance != null) {
                 return tempInstance
@@ -82,10 +87,10 @@ public abstract class WordRoomDatabase : RoomDatabase() {
             synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    WordRoomDatabase::class.java,
-                    "word_database"
+                    PostRoomDatabase::class.java,
+                    "post_database"
                 )
-                    .addCallback(WordDatabaseCallback(scope))
+                    .addCallback(PostDatabaseCallback(scope))
                     .build()
                 INSTANCE = instance
                 return instance

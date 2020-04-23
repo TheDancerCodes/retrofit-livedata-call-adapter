@@ -36,7 +36,6 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
-
     // Room components
     implementation "androidx.room:room-runtime:${versions.roomVersion}"
     implementation "androidx.room:room-ktx:${versions.roomVersion}"
@@ -55,6 +54,10 @@ dependencies {
 
     // Coroutines
     api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
+
+    // -- Retrofit2
+    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
 
     // UI
     implementation "com.google.android.material:material:${versions.material}"

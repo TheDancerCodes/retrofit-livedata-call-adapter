@@ -5,7 +5,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.thedancercodes.sample_app.model.Word
+import com.thedancercodes.sample_app.model.Post
 
 /**
  * In the DAO (data access object), you specify SQL queries and associate them with method calls.
@@ -16,17 +16,17 @@ import com.thedancercodes.sample_app.model.Word
  * or from another suspension function.
  */
 @Dao
-interface WordDao {
+interface PostDao {
 
     /* Getting all words ordered alphabetically */
-    @Query("SELECT * from word_table ORDER BY word ASC")
-    fun getAlphabetizedWords(): LiveData<List<Word>>
+    @Query("SELECT * from post_table ORDER BY post ASC")
+    fun getAlphabetizedPosts(): LiveData<List<Post>>
 
-    /* Inserting a word */
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun insert(word: Word)
+    suspend fun insert(post: Post)
 
     /* Deleting all words */
-    @Query("DELETE FROM word_table")
+    @Query("DELETE FROM post_table")
     suspend fun deleteAll()
+
 }

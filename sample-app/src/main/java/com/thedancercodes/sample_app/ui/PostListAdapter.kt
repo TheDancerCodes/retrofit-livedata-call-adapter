@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.thedancercodes.sample_app.R
-import com.thedancercodes.sample_app.model.Word
+import com.thedancercodes.sample_app.model.Post
 
-class WordListAdapter internal constructor(
+class PostListAdapter internal constructor(
     context: Context
-) : RecyclerView.Adapter<WordListAdapter.WordViewHolder>() {
+) : RecyclerView.Adapter<PostListAdapter.PostViewHolder>() {
 
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-    private var words = emptyList<Word>() // Cached copy of words
+    private var posts = emptyList<Post>() // Cached copy of posts
 
-    inner class WordViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val wordItemView: TextView = itemView.findViewById(R.id.textView)
+    inner class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val postTitleView: TextView = itemView.findViewById(R.id.postTitle)
+        val postTextView: TextView = itemView.findViewById(R.id.postText)
     }
 
     /**
@@ -43,9 +44,9 @@ class WordListAdapter internal constructor(
      * @see .getItemViewType
      * @see .onBindViewHolder
      */
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): WordViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val itemView = inflater.inflate(R.layout.recyclerview_item, parent, false)
-        return WordViewHolder(itemView)
+        return PostViewHolder(itemView)
     }
 
     /**
@@ -69,13 +70,14 @@ class WordListAdapter internal constructor(
      * item at the given position in the data set.
      * @param position The position of the item within the adapter's data set.
      */
-    override fun onBindViewHolder(holder: WordViewHolder, position: Int) {
-        val current = words[position]
-        holder.wordItemView.text = current.word
+    override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
+        val current = posts[position]
+        holder.postTitleView.text = current.title
+        holder.postTextView.text = current.body
     }
 
-    internal fun setWords(words: List<Word>) {
-        this.words = words
+    internal fun setPosts(posts: List<Post>) {
+        this.posts = posts
         notifyDataSetChanged()
     }
 
@@ -84,5 +86,5 @@ class WordListAdapter internal constructor(
      *
      * @return The total number of items in this adapter.
      */
-    override fun getItemCount() = words.size
+    override fun getItemCount() = posts.size
 }
