@@ -1,7 +1,7 @@
 apply plugin: 'com.jfrog.bintray'
 
 group 'com.thedancercodes'
-version '1.0.0'
+version '1.0.1'
 
 project.ext {
     mavGitUrl = 'https://github.com/TheDancerCodes/retrofit-livedata-call-adapter.git'
