@@ -61,4 +61,7 @@ dependencies {
 
     // UI
     implementation "com.google.android.material:material:${versions.material}"
+
+    // LiveData Call Adapter Dependency
+    implementation project(":livedatalibrary")
 }

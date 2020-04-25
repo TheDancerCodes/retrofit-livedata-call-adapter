@@ -7,4 +7,5 @@
     <dimen name="post_title">24sp</dimen>
     <dimen name="post_text">15sp</dimen>
     <dimen name="post_text_padding">10dp</dimen>
+    <dimen name="text_margin_standard">4dp</dimen>
 </resources>

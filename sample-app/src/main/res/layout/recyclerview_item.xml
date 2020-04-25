@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
@@ -23,7 +23,7 @@
                 android:layout_height="wrap_content"
                 android:paddingLeft="@dimen/post_text_padding"
                 android:paddingRight="@dimen/post_text_padding"
-                android:paddingTop="@dimen/post_text_padding"
+                android:paddingTop="@dimen/text_margin_standard"
                 android:textSize="@dimen/post_title"/>
 
             <TextView
@@ -33,9 +33,9 @@
                 android:layout_below="@+id/postTitle"
                 android:paddingLeft="@dimen/post_text_padding"
                 android:paddingRight="@dimen/post_text_padding"
-                android:paddingTop="@dimen/post_text_padding"
+                android:paddingTop="@dimen/text_margin_standard"
                 android:textSize="@dimen/post_text" />
 
         </RelativeLayout>
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 </LinearLayout>

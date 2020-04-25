@@ -1,20 +1,23 @@
 package com.thedancercodes.sample_app
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.snackbar.Snackbar
+import com.thedancercodes.livedatalibrary.ApiResponse
 import com.thedancercodes.sample_app.ui.PostListAdapter
 import com.thedancercodes.sample_app.ui.PostViewModel
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val newWordActivityRequestCode = 1
-    private lateinit var wordViewModel: PostViewModel // A member variable for the ViewModel
+    private val TAG: String = "SampleAppDebug"
+
+    private lateinit var postViewModel: PostViewModel // A member variable for the ViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         // Get a ViewModel from the ViewModelProvider.
-        wordViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
+        postViewModel = ViewModelProvider(this).get(PostViewModel::class.java)
 
         /**
          * Add an observer for the allPosts LiveData property from the WordViewModel.
@@ -35,37 +38,33 @@ class MainActivity : AppCompatActivity() {
          * The onChanged() method (the default method for our Lambda) fires when the observed data
          * changes and the activity is in the foreground.
          */
-        wordViewModel.allPosts.observe(this, Observer { words ->
-            // Update the cached copy of the posts in the adapter
-            words?.let { adapter.setPosts(it) }
+        postViewModel.finalPosts.observe(this, Observer { response ->
+
+            when(response) {
+                is ApiResponse.ApiSuccessResponse -> {
+
+                    // Update the cached copy of the posts in the adapter
+                    adapter.setPosts(response.body)
+
+                    Log.d(TAG, "POST RESPONSE: ${response.body}")
+                }
+
+                is ApiResponse.ApiErrorResponse -> {
+                    Log.d(TAG, "POST ERROR: ${response.errorMessage}")
+
+                    val snack = Snackbar
+                        .make(recyclerview, response.errorMessage, Snackbar.LENGTH_LONG)
+                    snack.show()
+                }
+
+                is ApiResponse.ApiEmptyResponse -> {
+                    val snack = Snackbar
+                        .make(recyclerview, "Empty Response", Snackbar.LENGTH_LONG)
+                    snack.show()
+
+                    Log.d(TAG, "POST EMPTY: Empty Response")
+                }
+            }
         })
-
-        val fab = findViewById<FloatingActionButton>(R.id.fab)
-        fab.setOnClickListener {
-            val intent = Intent(this@MainActivity, NewWordActivity::class.java)
-            startActivityForResult(intent, newWordActivityRequestCode)
-        }
     }
-
-    /**
-     * Dispatch incoming result to the correct fragment.
-     *
-     * We want to open the NewWordActivity when tapping on the FAB and, once we are back in the
-     * MainActivity, to either insert the new word in the database or show a Toast.
-     */
-//    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-//        super.onActivityResult(requestCode, resultCode, data)
-//
-//        if (requestCode == newWordActivityRequestCode && resultCode == Activity.RESULT_OK) {
-//            data?.getStringExtra(NewWordActivity.EXTRA_REPLY)?.let {
-//                val word = Word(it)
-//                wordViewModel.insert(word)
-//            }
-//        } else {
-//            Toast.makeText(
-//                applicationContext,
-//                R.string.empty_not_saved,
-//                Toast.LENGTH_LONG).show()
-//        }
-//    }
 }
