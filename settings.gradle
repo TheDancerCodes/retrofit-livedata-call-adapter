@@ -1,4 +1,3 @@
 rootProject.name='Retrofit Live Data Call Adapter'
-include ':app'
 include ':livedatalibrary'
 include ':sample-app'
