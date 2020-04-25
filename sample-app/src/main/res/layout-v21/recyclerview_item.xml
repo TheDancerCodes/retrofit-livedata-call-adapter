@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_margin="@dimen/card_margin"
+        android:elevation="3dp"
+        card_view:cardCornerRadius="@dimen/card_user_radius">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/postTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/post_text_padding"
+                android:paddingRight="@dimen/post_text_padding"
+                android:paddingTop="@dimen/text_margin_standard"
+                android:textSize="@dimen/post_title"
+                android:fontFamily="@font/avenir"/>
+
+            <TextView
+                android:id="@+id/postText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/postTitle"
+                android:paddingLeft="@dimen/post_text_padding"
+                android:paddingRight="@dimen/post_text_padding"
+                android:paddingTop="@dimen/text_margin_standard"
+                android:textSize="@dimen/post_text"
+                android:fontFamily="@font/avenir"/>
+
+        </RelativeLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>
