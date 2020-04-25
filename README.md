@@ -70,6 +70,7 @@ interface PostService {
 
 Also, note the usage of the `ApiResponse` object.
 It is a common class used by API responses when you want verify what is happening on your network call, so that you can ideally respond to the `Api Response`.
+
 See the example implementation below: 👇🏾
 
 
@@ -98,6 +99,8 @@ See the example implementation below: 👇🏾
         }
     })
 ```
+
+>NOTE: Checkout the `sample-app` for an in-depth example of this implementation.
 
 ## License
 ```text

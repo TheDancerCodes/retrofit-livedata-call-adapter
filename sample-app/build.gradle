@@ -37,10 +37,10 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     // Room components
-    implementation "androidx.room:room-runtime:${versions.roomVersion}"
-    implementation "androidx.room:room-ktx:${versions.roomVersion}"
-    kapt "androidx.room:room-compiler:${versions.roomVersion}"
-    androidTestImplementation "androidx.room:room-testing:${versions.roomVersion}"
+    implementation "androidx.room:room-runtime:$roomVersion"
+    implementation "androidx.room:room-ktx:$roomVersion"
+    kapt "androidx.room:room-compiler:$roomVersion"
+    androidTestImplementation "androidx.room:room-testing:$roomVersion"
 
     // Lifecycle components
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.archLifecycleVersion"
@@ -52,15 +52,13 @@ dependencies {
     // ViewModel class, enabling you to work with scopes.
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.archLifecycleVersion"
 
-    // Coroutines
-    api "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutines"
 
     // -- Retrofit2
-    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
     // UI
-    implementation "com.google.android.material:material:${versions.material}"
+    implementation "com.google.android.material:material:$material"
 
     // LiveData Call Adapter Dependency
     implementation project(":livedatalibrary")

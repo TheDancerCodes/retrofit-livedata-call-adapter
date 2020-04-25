@@ -4,15 +4,15 @@ apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-android-extensions'
 
 android {
-    compileSdkVersion versions.compileSdk
-    buildToolsVersion versions.buildTools
+    compileSdkVersion 29
+    buildToolsVersion "$buildTools"
 
     defaultConfig {
         applicationId "com.thedancercodes.livedatacalladapter"
-        minSdkVersion versions.minSdk
-        targetSdkVersion versions.targetSdk
-        versionCode versions.libVersionCode
-        versionName versions.libVersionName
+        minSdkVersion "$minSdk"
+        targetSdkVersion "$targetSdk"
+        versionCode 1
+        versionName "$libVersionName"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,17 +28,17 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${versions.kotlin}"
-    implementation "androidx.appcompat:appcompat:${versions.appCompat}"
-    implementation "androidx.core:core-ktx:${versions.coreKtx}"
-    implementation "com.google.android.material:material:${versions.material}"
-    implementation "androidx.constraintlayout:constraintlayout:${versions.constraintLayout}"
-    testImplementation "junit:junit:${versions.junit}"
-    androidTestImplementation "androidx.test.espresso:espresso-core:${versions.espresso}"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin"
+    implementation "androidx.appcompat:appcompat:$appCompat"
+    implementation "androidx.core:core-ktx:$coreKtx"
+    implementation "com.google.android.material:material:$material"
+    implementation "androidx.constraintlayout:constraintlayout:$constraintLayout"
+    testImplementation "junit:junit:$junit"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso"
 
     // -- Retrofit2
-    implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
-    implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
 
     // -- Lifecycle Components (ViewModel, LiveData and ReactiveStreams)
     def lifecycle_version = "2.2.0-alpha03"
