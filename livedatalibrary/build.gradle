@@ -43,6 +43,9 @@ dependencies {
     // -- Retrofit2
     implementation "com.squareup.retrofit2:retrofit:${versions.retrofit}"
     implementation "com.squareup.retrofit2:converter-gson:${versions.retrofit}"
+
+    // Timber Logging
+    implementation 'com.jakewharton.timber:timber:4.7.1'
 }
 
 apply from: 'publish.gradle'

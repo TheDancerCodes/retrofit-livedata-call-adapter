@@ -2,6 +2,7 @@ package com.thedancercodes.livedatalibrary
 
 import android.util.Log
 import retrofit2.Response
+import timber.log.Timber
 
 /**
  * Copied from Architecture components google sample:
@@ -31,10 +32,12 @@ sealed class ApiResponse<T> {
         // Returns a response
         fun <T> create(response: Response<T>): ApiResponse<T> {
 
-            Log.d(TAG, "GenericApiResponse: response: ${response}")
-            Log.d(TAG, "GenericApiResponse: raw: ${response.raw()}")
-            Log.d(TAG, "GenericApiResponse: headers: ${response.headers()}")
-            Log.d(TAG, "GenericApiResponse: message: ${response.message()}")
+            if (BuildConfig.DEBUG) {
+                Timber.tag(TAG).d("GenericApiResponse: response: ${response}")
+                Timber.tag(TAG).d("GenericApiResponse: raw: ${response.raw()}")
+                Timber.tag(TAG).d("GenericApiResponse: headers: ${response.headers()}")
+                Timber.tag(TAG).d("GenericApiResponse: message: ${response.message()}")
+            }
 
             if(response.isSuccessful){
                 val body = response.body()
