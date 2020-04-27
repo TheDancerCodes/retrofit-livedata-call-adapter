@@ -1,6 +1,7 @@
-# Retrofit LiveData Adapter Retrofit
+# Retrofit LiveData Call Adapter
 
 [ ![Download](https://api.bintray.com/packages/taracha/live-data/RetrofitLiveDataCallAdapter/images/download.svg?version=1.0.1) ](https://bintray.com/taracha/live-data/RetrofitLiveDataCallAdapter/1.0.1/link)
+
 This is a simple Retrofit Adapter for Android LiveData that you can easily integrate in your applications.
 
 **Original Credit:** I leverage the classes from one of the [Android Architecture Google Samples](https://github.com/googlesamples/android-architecture-components/tree/master/GithubBrowserSample).
